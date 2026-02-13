@@ -1,5 +1,5 @@
 // ================= UNLOCK MOBILE AUDIO =================
-const audio = document.getElementById("bgMusic");
+const audio = document.getElementById("bgm");
 const intro = document.getElementById("intro");
 
 let started = false;
@@ -38,7 +38,7 @@ const messages = [
 "Happy Valentine's Day"
 ];
 
-const chatBox = document.getElementById("chatText");
+const chatBox = document.getElementById("bubble");
 
 function startTyping(){
     let i=0;
