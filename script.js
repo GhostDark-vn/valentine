@@ -60,7 +60,7 @@ function createHeart(){
         const y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
 
         const img = document.createElement("img");
-        img.src=`img/${i+1}.jpg`;
+        img.src=`./assets/photos/${i+1}.jpg`;
         img.className="heart-img";
 
         const px = size + x*size/18 - 30;
