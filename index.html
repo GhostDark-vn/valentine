@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valentine</title>
+<style>
+  body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: radial-gradient(circle at center, #1a1a2e, #0a0a12 70%);
+    color:#fff;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    overflow:hidden;
+  }.container{ text-align:center; max-width:600px; padding:20px; animation: fadeIn 2s ease forwards; opacity:0; }
+
+.heart{ position:relative; width:220px; height:200px; margin:0 auto 30px; transform: rotate(-45deg); background:#ff4d6d22; border-radius:20px; }
+
+.heart::before, .heart::after{ content:""; position:absolute; width:220px; height:200px; background:#ff4d6d22; border-radius:50%; }
+
+.heart::before{ top:-110px; left:0; } .heart::after{ left:110px; top:0; }
+
+.message{ font-size:1.3rem; line-height:1.8; opacity:0; animation: fadeIn 3s ease forwards 1.5s; }
+
+.hint{ margin-top:25px; font-size:0.95rem; color:#cfcfe8; opacity:0; animation: fadeIn 3s ease forwards 3.5s; }
+
+@keyframes fadeIn{ to{opacity:1} } </style>
+
+</head>
+<body><div class="container">
+  <div class="heart"></div>  <div class="message">
+    Không cần gì đặc biệt đâu,<br/>
+    chỉ mong hôm nay em có một ngày dễ chịu hơn mọi hôm.<br/><br/>
+    Vậy là đủ rồi.
+  </div>  <div class="hint">
+    (chỉ là một lời chúc bình thường thôi)
+  </div>
+</div></body>
+</html>
