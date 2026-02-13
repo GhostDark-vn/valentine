@@ -1,0 +1,102 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:#02030a;
+font-family:system-ui;
+color:white;
+overflow:hidden;
+}
+
+/* INTRO */
+#intro{
+position:fixed;
+inset:0;
+background:#02030a;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:10;
+}
+.tap{
+padding:18px 28px;
+border-radius:20px;
+background:#ffffff10;
+backdrop-filter:blur(10px);
+font-size:20px;
+}
+
+/* SKY */
+#sky{
+position:fixed;
+inset:0;
+z-index:0;
+}
+
+/* CHAT */
+.chat{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;
+z-index:2;
+}
+
+.bubble{
+max-width:80%;
+padding:18px 22px;
+background:#ffffff14;
+border-radius:22px;
+backdrop-filter:blur(18px);
+font-size:20px;
+line-height:1.6;
+text-align:center;
+opacity:0;
+transform:translateY(20px);
+transition:0.6s;
+}
+
+/* HEART */
+#heartContainer{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:1;
+pointer-events:none;
+}
+
+.heart{
+position:relative;
+width:320px;
+height:320px;
+opacity:0;
+transform:scale(.7);
+transition:1.2s;
+filter:drop-shadow(0 0 40px #ff4d88)
+       drop-shadow(0 0 90px #ff4d88);
+}
+
+.heart img{
+position:absolute;
+width:70px;
+height:70px;
+object-fit:cover;
+border-radius:12px;
+}
+
+/* ENDING */
+#ending{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+letter-spacing:4px;
+opacity:0;
+z-index:3;
+text-shadow:0 0 25px #ff7aa8;
+transition:2s;
+}
