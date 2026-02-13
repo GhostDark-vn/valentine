@@ -1,6 +1,32 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-const audio=document.getElementById("bgm"); const intro=document.getElementById("intro");
+const audio=document.getElementById("bgm");
+const intro = document.getElementById("intro");
+const audio = document.getElementById("bgm");
+
+let started = false;
+
+intro.addEventListener("click", async () => {
+  if (started) return;
+  started = true;
+
+  try {
+    // QUAN TRỌNG: play trong gesture
+    audio.currentTime = 0;
+    audio.volume = 1;
+    await audio.play();
+  } catch (e) {
+    console.log("Autoplay blocked:", e);
+  }
+
+  // sau khi play mới chạy hiệu ứng
+  intro.classList.add("fade-out");
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    startShow(); // hiệu ứng chữ + sao + trái tim
+  }, 600);
+});
 
 function unlock(){ audio.muted=true; audio.play().then(()=>{ audio.muted=false; let v=0;audio.volume=0; const fade=setInterval(()=>{v+=0.02;audio.volume=v;if(v>=0.8)clearInterval(fade);},60); intro.style.opacity=0;setTimeout(()=>intro.remove(),800); }); } document.addEventListener("click",unlock,{once:true}); document.addEventListener("touchstart",unlock,{once:true});
 
