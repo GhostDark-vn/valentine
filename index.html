@@ -1,40 +1,18 @@
 <!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html><html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just for you</title>
-
-    <!-- Font chữ nhẹ, ấm -->
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just for you</title>  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body><canvas id="stars"></canvas>
 
-<body>
+  <div class="chat">
+    <div id="bubble"></div>
+  </div><canvas id="heartCanvas"></canvas>
 
-    <!-- nền mờ -->
-    <div class="bg"></div>
-
-    <!-- khung lời chúc -->
-    <div class="container">
-        <div class="card" id="card">
-            <div id="message"></div>
-            <button id="nextBtn">Đọc tiếp nèk...</button>
-        </div>
-    </div>
-
-    <!-- canvas ghép ảnh thành trái tim -->
-    <canvas id="heartCanvas"></canvas>
-
-    <!-- nhạc nền -->
-    <audio id="bgm" loop>
-        <source src="./assets/youth-instrumental.mp3" type="audio/mpeg">
-    </audio>
-
-<div id="tapToStart"></div>
-
-    <script src="script.js"></script>
-
-</body>
+  <audio id="bgm" loop>
+    <source src="./assets/youth-instrumental.mp3" type="audio/mpeg">
+  </audio>  <script src="script.js"></script></body>
 </html>
