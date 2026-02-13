@@ -1,10 +1,21 @@
 const tap = document.getElementById("tapToStart");
 const audio = document.getElementById("bgm");
 
-tap.onclick = () => {
+document.body.addEventListener("click", startAudio, { once:true });
+document.body.addEventListener("touchstart", startAudio, { once:true });
+
+function startAudio(){
+    audio.volume = 80;
     audio.play();
-    tap.style.display="none";
-};
+
+    // fade in
+    let v=0;
+    const fade=setInterval(()=>{
+        v+=0.02;
+        audio.volume=v;
+        if(v>=0.7) clearInterval(fade);
+    },60);
+}
 
 const messages = [
 "Hôm nay chắc em cũng mệt rồi nhỉ.",
