@@ -1,0 +1,84 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body{
+    height:100vh;
+    background: radial-gradient(circle at center, #0f172a, #020617);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* hiệu ứng sao trời */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image:radial-gradient(white 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:0.15;
+    animation:moveStars 80s linear infinite;
+}
+
+@keyframes moveStars{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-1000px); }
+}
+
+.container{
+    position:relative;
+    z-index:2;
+}
+
+.card{
+    width:320px;
+    padding:30px;
+    text-align:center;
+    border-radius:24px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(14px);
+    color:#fff;
+    box-shadow:0 0 40px rgba(255,255,255,0.08);
+    transition:0.4s;
+}
+
+.card.show{
+    transform:scale(1.04);
+}
+
+#message{
+    font-size:18px;
+    line-height:1.6;
+    min-height:70px;
+    margin-bottom:25px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:0.5s;
+}
+
+#message.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+button{
+    border:none;
+    background:#f472b6;
+    color:white;
+    padding:10px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:14px;
+}
+
+button:hover{
+    background:#fb7185;
+    transform:scale(1.05);
+}
