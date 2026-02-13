@@ -1,93 +1,116 @@
 const audio = document.getElementById("bgm");
 
-function unlockAudio() {
-
-    audio.muted = true;
-    audio.play().then(()=>{
-
-        audio.muted = false;
-
-        let v = 0;
-        audio.volume = 0;
-
-        const fade = setInterval(()=>{
-            v += 0.03;
-            audio.volume = v;
-            if(v >= 0.8) clearInterval(fade);
-        }, 60);
-
-    }).catch(()=>{});
+/* unlock audio */
+function unlock(){
+ audio.muted=true;
+ audio.play().then(()=>{
+   audio.muted=false;
+   audio.volume=0;
+   let v=0;
+   const fade=setInterval(()=>{
+     v+=0.02;
+     audio.volume=v;
+     if(v>=0.8) clearInterval(fade);
+   },60);
+ });
 }
+document.addEventListener("click",unlock,{once:true});
+document.addEventListener("touchstart",unlock,{once:true});
 
-document.addEventListener("click", unlockAudio, {once:true});
-document.addEventListener("touchstart", unlockAudio, {once:true});
-const messages = [
+/* ===== sao ===== */
+const starCanvas=document.getElementById("stars");
+const ctx=starCanvas.getContext("2d");
+
+function resize(){
+ starCanvas.width=innerWidth;
+ starCanvas.height=innerHeight;
+}
+resize();
+window.onresize=resize;
+
+const stars=[...Array(40)].map(()=>({
+ x:Math.random()*innerWidth,
+ y:Math.random()*innerHeight,
+ r:Math.random()*1.2,
+ a:Math.random()
+}));
+
+function drawStars(){
+ ctx.clearRect(0,0,starCanvas.width,starCanvas.height);
+ stars.forEach(s=>{
+   s.a+= (Math.random()-.5)*.02;
+   ctx.globalAlpha=Math.max(.15,Math.min(.9,s.a));
+   ctx.beginPath();
+   ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+   ctx.fillStyle="white";
+   ctx.fill();
+ });
+ requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* ===== chat typing ===== */
+const lines=[
 "Hôm nay chắc em cũng mệt rồi nhỉ.",
 "Không cần trả lời đâu.",
 "Chỉ mong hôm nay của em dễ chịu hơn một chút.",
 "Vậy là đủ rồi."
 ];
 
-const msgEl = document.getElementById("message");
-const btn = document.getElementById("nextBtn");
-const card = document.getElementById("card");
+const bubble=document.getElementById("bubble");
+let i=0;
 
-let step = 0;
+function typeLine(text,cb){
+ bubble.classList.add("show");
+ bubble.innerHTML="";
+ let n=0;
+ const t=setInterval(()=>{
+   bubble.innerHTML+=text[n];
+   n++;
+   if(n>=text.length){
+     clearInterval(t);
+     setTimeout(cb,2400);
+   }
+ },40);
+}
 
-card.classList.add("show");
-msgEl.innerText = messages[0];
+function nextLine(){
+ if(i<lines.length){
+   typeLine(lines[i],()=>{i++;nextLine();});
+ }else{
+   setTimeout(showHeart,1000);
+ }
+}
 
-btn.onclick = () => {
-    step++;
-    if(step < messages.length){
-        msgEl.innerText = messages[step];
-    }else{
-        card.style.opacity = 0;
-        btn.style.display="none";
-        setTimeout(showHeart,800);
-    }
-};
+setTimeout(nextLine,1200);
 
-/* ====== TRÁI TIM ====== */
+/* ===== HEART 30 PHOTOS ===== */
+function heartPos(t){
+ return {
+  x:16*Math.pow(Math.sin(t),3),
+  y:-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))
+ };
+}
 
 function showHeart(){
+ const total=30;
+ for(let k=0;k<total;k++){
+   const img=document.createElement("img");
+   img.src=`assets/photos/${k+1}.jpg`;
+   img.className="photo";
 
-    const positions = [
-        {x:50,y:35},
-        {x:35,y:55},
-        {x:65,y:55},
-        {x:50,y:75}
-    ];
+   document.body.appendChild(img);
 
-    for(let i=1;i<=4;i++){
-        let img=document.createElement("img");
-        img.src=`assets/photos/${i}.jpg`;
-        img.className="photo";
+   const t=(k/total)*Math.PI*2;
+   const p=heartPos(t);
 
-        // vị trí bắt đầu ngoài màn hình
-        img.style.left=Math.random()*100+"vw";
-        img.style.top="-20vh";
+   const scale=12;
+   const x=innerWidth/2 + p.x*scale -35;
+   const y=innerHeight/2 + p.y*scale -35;
 
-        document.body.appendChild(img);
+   img.style.left=x+"px";
+   img.style.top=y+"px";
 
-        setTimeout(()=>{
-            img.classList.add("fly");
-            img.style.left=positions[i-1].x+"vw";
-            img.style.top=positions[i-1].y+"vh";
-        },400*i);
-
-        // ghép tim
-        setTimeout(()=>{
-            img.classList.add("heart");
-        },2200);
-    }
-
-    // glow
-    const glow=document.createElement("div");
-    glow.className="glow";
-    glow.style.left="calc(50vw - 130px)";
-    glow.style.top="calc(55vh - 115px)";
-    document.body.appendChild(glow);
-
-    setTimeout(()=>glow.classList.add("show"),2600);
+   setTimeout(()=>img.classList.add("show"),80*k);
+ }
 }
