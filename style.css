@@ -62,15 +62,3 @@ opacity:1;
 transform:scale(1);
 }
 
-#tapToStart{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#0b0b0f;
-    animation:fadeOut 1.2s forwards;
-    animation-delay:.6s;
-}
-
-@keyframes fadeOut{
-    to{opacity:0;pointer-events:none;}
-}
