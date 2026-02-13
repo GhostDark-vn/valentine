@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", ()=>{
 const audio = document.getElementById("bgm");
 
 /* unlock audio */
@@ -114,3 +115,5 @@ function showHeart(){
    setTimeout(()=>img.classList.add("show"),80*k);
  }
 }
+});
+console.log("script loaded");
