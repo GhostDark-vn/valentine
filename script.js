@@ -1,3 +1,11 @@
+const tap = document.getElementById("tapToStart");
+const audio = document.getElementById("bgm");
+
+tap.onclick = () => {
+    audio.play();
+    tap.style.display="none";
+};
+
 const messages = [
 "Hôm nay chắc em cũng mệt rồi nhỉ.",
 "Không cần trả lời đâu.",
