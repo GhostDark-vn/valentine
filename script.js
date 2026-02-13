@@ -1,22 +1,26 @@
-const tap = document.getElementById("tapToStart");
 const audio = document.getElementById("bgm");
 
-document.body.addEventListener("click", startAudio, { once:true });
-document.body.addEventListener("touchstart", startAudio, { once:true });
+function unlockAudio() {
 
-function startAudio(){
-    audio.volume = 0;
-    audio.play();
+    audio.muted = true;
+    audio.play().then(()=>{
 
-    // fade in
-    let v=0;
-    const fade=setInterval(()=>{
-        v+=0.02;
-        audio.volume=v;
-        if(v>=0.7) clearInterval(fade);
-    },60);
+        audio.muted = false;
+
+        let v = 0;
+        audio.volume = 0;
+
+        const fade = setInterval(()=>{
+            v += 0.03;
+            audio.volume = v;
+            if(v >= 0.8) clearInterval(fade);
+        }, 60);
+
+    }).catch(()=>{});
 }
 
+document.addEventListener("click", unlockAudio, {once:true});
+document.addEventListener("touchstart", unlockAudio, {once:true});
 const messages = [
 "Hôm nay chắc em cũng mệt rồi nhỉ.",
 "Không cần trả lời đâu.",
