@@ -4,18 +4,29 @@ const bubble = document.getElementById("chatBox");
 const ending = document.getElementById("ending");
 const heartBox = document.getElementById("heartContainer");
 
-let started=false;
+let started = false;
 
-intro.onclick = () =>{
+function startExperience(){
 if(started) return;
-started=true;
+started = true;
 
-intro.style.display="none";
+intro.style.opacity = 0;
+setTimeout(()=> intro.style.display="none",400);
+
+// unlock audio mobile
+music.muted = false;
 music.play().catch(()=>{});
 
 startSky();
 startStory();
-};
+}
+
+/* MOBILE SAFE TAP */
+["click","touchstart","pointerdown"].forEach(evt=>{
+intro.addEventListener(evt,startExperience,{once:true});
+});
+
+let started=false;
 
 /* ================= SKY ================= */
 function startSky(){
