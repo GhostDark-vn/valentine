@@ -26,8 +26,6 @@ startStory();
 intro.addEventListener(evt,startExperience,{once:true});
 });
 
-let started=false;
-
 /* ================= SKY ================= */
 function startSky(){
 const canvas=document.getElementById("sky");
