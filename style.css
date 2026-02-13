@@ -111,14 +111,12 @@ button:hover{
 #tapToStart{
     position:fixed;
     inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    z-index:9999;
     background:#0b0b0f;
-    color:white;
-    font-size:18px;
-    letter-spacing:1px;
-    z-index:999;
-    cursor:pointer;
+    animation:fadeOut 1.2s forwards;
+    animation-delay:.6s;
 }
 
+@keyframes fadeOut{
+    to{opacity:0;pointer-events:none;}
+}
