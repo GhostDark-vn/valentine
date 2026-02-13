@@ -5,7 +5,7 @@ document.body.addEventListener("click", startAudio, { once:true });
 document.body.addEventListener("touchstart", startAudio, { once:true });
 
 function startAudio(){
-    audio.volume = 80;
+    audio.volume = 0;
     audio.play();
 
     // fade in
