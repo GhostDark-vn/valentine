@@ -133,6 +133,6 @@ function showHeart(){
  glow.style.top=y+"px";
  document.body.appendChild(glow);
 }
-}
+ 
 });
 console.log("script loaded");
