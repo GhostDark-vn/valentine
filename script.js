@@ -1,3 +1,7 @@
+window.onerror = function(e){
+  alert("JS ERROR: " + e);
+};
+
 const intro = document.getElementById("intro");
 const audio = document.getElementById("bgm");
 const textBox = document.getElementById("textBox");
