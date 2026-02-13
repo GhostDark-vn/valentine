@@ -14,7 +14,8 @@ background:#02030a;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:10;
+z-index:9999;
+touch-action:manipulation;   /* chống delay mobile */
 }
 .tap{
 padding:18px 28px;
