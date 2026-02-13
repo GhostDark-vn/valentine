@@ -94,8 +94,16 @@ function heartPos(t){
 }
 
 function showHeart(){
+
  const total=30;
+
+ const centerX = window.innerWidth/2;
+ const centerY = window.innerHeight/2;
+
+ const size = Math.min(window.innerWidth, window.innerHeight) / 28;
+
  for(let k=0;k<total;k++){
+
    const img=document.createElement("img");
    img.src=`assets/photos/${k+1}.jpg`;
    img.className="photo";
@@ -105,15 +113,26 @@ function showHeart(){
    const t=(k/total)*Math.PI*2;
    const p=heartPos(t);
 
-   const scale=12;
-   const x=innerWidth/2 + p.x*scale -35;
-   const y=innerHeight/2 + p.y*scale -35;
+   const x=centerX + p.x*size -35;
+   const y=centerY + p.y*size -35;
 
    img.style.left=x+"px";
    img.style.top=y+"px";
 
-   setTimeout(()=>img.classList.add("show"),80*k);
+   setTimeout(()=>{
+     img.classList.add("show");
+   },70*k);
  }
+
+ createGlow(centerX,centerY);
+}
+ function createGlow(x,y){
+ const glow=document.createElement("div");
+ glow.className="heartGlow";
+ glow.style.left=x+"px";
+ glow.style.top=y+"px";
+ document.body.appendChild(glow);
+}
 }
 });
 console.log("script loaded");
