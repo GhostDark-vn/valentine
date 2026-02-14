@@ -223,12 +223,24 @@ loop();
 
 /* ====================== START ====================== */
 
-gift.addEventListener("pointerdown",()=>{
+gift.addEventListener("pointerdown", startShow, {once:true});
+gift.addEventListener("touchstart", startShow, {once:true});
+gift.addEventListener("click", startShow, {once:true});
+
+function startShow(e){
+
+  // ép browser hiểu đây là user gesture
+  const p = music.play();
+  if(p!==undefined){
+    p.then(()=>{}).catch(()=>{});
+  }
+
+  music.currentTime = 0;
+  music.volume = 1;
+
   gift.style.display="none";
-  music.currentTime=0;
-  music.volume=1;
-  music.play().catch(()=>{});
+
   explode(W/2,H/2,400);
   phase="explode";
   phaseTime=performance.now();
-},{once:true});
+}
