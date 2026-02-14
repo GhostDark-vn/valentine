@@ -1,3 +1,25 @@
+const startScreen = document.getElementById("start");
+const music = document.getElementById("music");
+
+startScreen.addEventListener("pointerdown", boot, {once:true});
+startScreen.addEventListener("touchstart", boot, {once:true});
+startScreen.addEventListener("click", boot, {once:true});
+
+function boot(){
+
+    // ép mobile cho phép phát nhạc
+    music.muted = true;
+    music.play().then(()=>{
+        music.muted=false;
+        music.currentTime=0;
+    });
+
+    startScreen.style.display="none";
+
+    // bắt đầu animation
+    startShow();
+}
+
 const canvas = document.getElementById("stage");
 const ctx = canvas.getContext("2d");
 const gift = document.getElementById("gift");
