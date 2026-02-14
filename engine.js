@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", ()=>{
 function draw(){
 const canvas = document.getElementById("stage");
 const ctx = canvas.getContext("2d");
@@ -149,3 +150,4 @@ setTimeout(nextMessage,3500);
 formHeart();
 }
 }
+});
