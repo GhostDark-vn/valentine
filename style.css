@@ -1,0 +1,57 @@
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+background:#05070f;
+overflow:hidden;
+font-family:system-ui;
+}
+
+/* canvas */
+#stage{
+position:fixed;
+inset:0;
+z-index:0;
+}
+
+/* gift */
+#gift{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+cursor:pointer;
+z-index:10;
+text-align:center;
+}
+
+/* box */
+.box{
+width:90px;
+height:70px;
+background:linear-gradient(145deg,#ff6fa5,#ff9ac2);
+border-radius:10px;
+box-shadow:0 0 35px rgba(255,120,180,.8);
+animation:pulse 1.6s infinite;
+}
+
+.lid{
+width:100px;
+height:25px;
+background:#ff8fb9;
+border-radius:8px;
+margin-bottom:-10px;
+animation:pulse 1.6s infinite;
+}
+
+.label{
+margin-top:20px;
+color:#ffd7e7;
+letter-spacing:2px;
+opacity:.9;
+}
+
+@keyframes pulse{
+0%{transform:scale(.92)}
+50%{transform:scale(1.06)}
+100%{transform:scale(.92)}
+}
