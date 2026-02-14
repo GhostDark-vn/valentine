@@ -6,22 +6,24 @@ const heartBox = document.getElementById("heartContainer");
 
 let started = false;
 
-async function startExperience(e){
+async function startExperience(){
 if(started) return;
 started = true;
 
-/* ===== UNLOCK AUDIO (BẮT BUỘC PHẢI ĐẦU TIÊN) ===== */
-try{
-    music.muted = false;
-    music.currentTime = 0;
+/* unlock hệ thống âm thanh */
+unlockAudio();
 
-    const p = music.play();
-    if(p !== undefined) await p;
-}catch(err){
-    console.log("audio blocked:", err);
+/* play nhạc NGAY TRONG CLICK */
+try{
+music.muted = false;
+music.volume = 1;
+music.currentTime = 0;
+await music.play();
+}catch(e){
+console.log("play fail:",e);
 }
 
-/* ===== UI START SAU KHI NHẠC ĐÃ ĐƯỢC CHO PHÉP ===== */
+/* bắt đầu hiệu ứng */
 intro.style.opacity = 0;
 setTimeout(()=> intro.style.display="none",400);
 
