@@ -77,3 +77,27 @@ opacity:.9;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+#finalText{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(.8);
+font-family:'Great Vibes',cursive;
+font-size: clamp(38px,7vw,72px);
+color:#ffd9ec;
+opacity:0;
+pointer-events:none;
+z-index:6;
+text-align:center;
+text-shadow:
+0 0 8px rgba(255,150,200,.7),
+0 0 18px rgba(255,120,180,.6),
+0 0 38px rgba(255,80,160,.5);
+transition:opacity 1.8s ease, transform 1.8s ease;
+}
+
+#finalText.show{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
