@@ -1,103 +1,84 @@
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Segoe UI", sans-serif;
+}
 
 body{
-background:#05070f;
-overflow:hidden;
-font-family:system-ui;
+    height:100vh;
+    background: radial-gradient(circle at center, #0f172a, #020617);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-/* canvas */
-#stage{
-position:fixed;
-inset:0;
-z-index:0;
+/* hiệu ứng sao trời */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image:radial-gradient(white 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:0.15;
+    animation:moveStars 80s linear infinite;
 }
 
-/* gift */
-#gift{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-cursor:pointer;
-z-index:10;
-text-align:center;
+@keyframes moveStars{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-1000px); }
 }
 
-#start{
-position:fixed;
-inset:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:5;
-cursor:pointer;
+.container{
+    position:relative;
+    z-index:2;
 }
 
-.gift{
-width:90px;
-height:90px;
-border-radius:18px;
-background:linear-gradient(145deg,#ff4d88,#ff9ac2);
-box-shadow:0 0 40px #ff4d88;
-animation:pulse 1.4s infinite;
+.card{
+    width:320px;
+    padding:30px;
+    text-align:center;
+    border-radius:24px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(14px);
+    color:#fff;
+    box-shadow:0 0 40px rgba(255,255,255,0.08);
+    transition:0.4s;
 }
 
-/* box */
-.box{
-width:90px;
-height:70px;
-background:linear-gradient(145deg,#ff6fa5,#ff9ac2);
-border-radius:10px;
-box-shadow:0 0 35px rgba(255,120,180,.8);
-animation:pulse 1.6s infinite;
+.card.show{
+    transform:scale(1.04);
 }
 
-.lid{
-width:100px;
-height:25px;
-background:#ff8fb9;
-border-radius:8px;
-margin-bottom:-10px;
-animation:pulse 1.6s infinite;
+#message{
+    font-size:18px;
+    line-height:1.6;
+    min-height:70px;
+    margin-bottom:25px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:0.5s;
 }
 
-.label{
-margin-top:20px;
-color:#ffd7e7;
-letter-spacing:2px;
-opacity:.9;
+#message.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
-@keyframes pulse{
-0%{transform:scale(.92)}
-50%{transform:scale(1.06)}
-100%{transform:scale(.92)}
+button{
+    border:none;
+    background:#f472b6;
+    color:white;
+    padding:10px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:14px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
-#finalText{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(.8);
-font-family:'Great Vibes',cursive;
-font-size: clamp(38px,7vw,72px);
-color:#ffd9ec;
-opacity:0;
-pointer-events:none;
-z-index:6;
-text-align:center;
-text-shadow:
-0 0 8px rgba(255,150,200,.7),
-0 0 18px rgba(255,120,180,.6),
-0 0 38px rgba(255,80,160,.5);
-transition:opacity 1.8s ease, transform 1.8s ease;
-}
-
-#finalText.show{
-opacity:1;
-transform:translate(-50%,-50%) scale(1);
+button:hover{
+    background:#fb7185;
+    transform:scale(1.05);
 }
