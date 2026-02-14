@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just for you</title>
-
-    <!-- Font chữ nhẹ, ấm -->
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just for you</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-    <!-- nền mờ -->
-    <div class="bg"></div>
+<div id="intro">mở giúp anh một chút nhé</div>
 
-    <!-- khung lời chúc -->
-    <div class="container">
-        <div class="card" id="card">
-            <div id="message"></div>
-            <button id="nextBtn">tiếp</button>
-        </div>
-    </div>
+<canvas id="stars"></canvas>
 
-    <!-- canvas ghép ảnh thành trái tim -->
-    <canvas id="heartCanvas"></canvas>
+<div class="chat">
+  <div id="bubble"></div>
+</div>
 
-    <!-- nhạc nền -->
-    <audio autoplay loop>
-        <source src="assets/youth-instrumental.mp3" type="audio/mpeg">
-    </audio>
+<canvas id="heartCanvas"></canvas>
 
-    <script src="script.js"></script>
+<audio id="bgm" loop>
+  <source src="./assets/bg.mp3" type="audio/mpeg">
+</audio>
 
+<script src="script.js" defer></script>
 </body>
 </html>
