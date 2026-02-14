@@ -286,3 +286,22 @@ function startShow(e){
   phase="explode";
   phaseTime=performance.now();
 }
+
+const finalText = document.getElementById("finalText");
+
+function showFinalMessage(){
+
+    setTimeout(()=>{
+        finalText.classList.add("show");
+    },3000); // đợi tim ổn định
+
+    // reset show
+    setTimeout(()=>{
+        finalText.classList.remove("show");
+        restartShow();
+    },9000);
+}
+
+function restartShow(){
+    location.reload();
+}
