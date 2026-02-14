@@ -61,11 +61,11 @@ draw();
 /* ================= STORY ================= */
 
 const messages=[
-"Chào em.",
-"Anh không định làm phiền em đâu.",
+"Hôm nay chắc mệt rồi ha ",
+"Có thể em đã nhận quà hay nhiều lời chúc.",
 "Chỉ là hôm nay hơi đặc biệt...",
-"Nên anh muốn để lại điều nhỏ thôi.",
-"Mong rằng đâu đó, em vẫn ổn.",
+"Anh chỉ muốn chúc em ngủ ngon.",
+"Và có giấc mơ thậy đẹp.",
 "Và nếu em đang mỉm cười...",
 "Thì anh thấy đủ rồi."
 ];
