@@ -6,25 +6,31 @@ const heartBox = document.getElementById("heartContainer");
 
 let started = false;
 
-function startExperience(){
+async function startExperience(e){
 if(started) return;
 started = true;
 
+/* ===== UNLOCK AUDIO (BẮT BUỘC PHẢI ĐẦU TIÊN) ===== */
+try{
+    music.muted = false;
+    music.currentTime = 0;
+
+    const p = music.play();
+    if(p !== undefined) await p;
+}catch(err){
+    console.log("audio blocked:", err);
+}
+
+/* ===== UI START SAU KHI NHẠC ĐÃ ĐƯỢC CHO PHÉP ===== */
 intro.style.opacity = 0;
 setTimeout(()=> intro.style.display="none",400);
-
-// unlock audio mobile
-music.muted = false;
-music.play().catch(()=>{});
 
 startSky();
 startStory();
 }
 
 /* MOBILE SAFE TAP */
-["click","touchstart","pointerdown"].forEach(evt=>{
-intro.addEventListener(evt,startExperience,{once:true});
-});
+intro.addEventListener("pointerdown", startExperience, { once:true });
 
 /* ================= SKY ================= */
 function startSky(){
