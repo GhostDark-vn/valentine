@@ -63,7 +63,7 @@ function drawStars(){
 /* ====================== PARTICLE ====================== */
 
 function explode(x,y,count=220){
-  for(let i=0;i<count;i++){
+  for(let i=0;i<count*0.6;i++){
     particles.push({
       x,y,
       vx:(Math.random()-.5)*4,
@@ -227,9 +227,14 @@ function loop(){
 
     ctx.shadowBlur=0;
     ctx.fillStyle="white";
-    ctx.font="bold 38px serif";
+    ctx.save();
+    ctx.shadowBlur=40;
+    ctx.shadowColor="#ff7eb6";
+    ctx.fillStyle="#ffd6ec";
+    ctx.font="56px 'Great Vibes'";
     ctx.textAlign="center";
-    ctx.fillText("Happy Valentine's Day",W/2,H/2+130);
+    ctx.fillText("Happy Valentine's Day",W/2,H/2+140);
+    ctx.restore();
   }
 
   requestAnimationFrame(loop);
@@ -255,7 +260,7 @@ function startShow(e){
 
   gift.style.display="none";
 
-  explode(W/2,H/2,400);
+  explode(W/2,H/2,220);
   phase="explode";
   phaseTime=performance.now();
 }
