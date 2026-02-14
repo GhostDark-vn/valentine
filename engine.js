@@ -36,7 +36,7 @@ particles.push({
 x,y,
 vx:(Math.random()-0.5)*0.8,
 vy:Math.random()*1+0.5,
-size:Math.random()*2+1,
+size:Math.random()*3+2,
 alpha:1,
 char:"Gia Như",
 lock:false
@@ -101,7 +101,7 @@ state="heart";
 
 function draw(){
 
-ctx.fillStyle="rgba(7,11,23,0.35)";
+ctx.fillStyle="rgba(7,11,23,0.12)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
 particles.forEach(p=>{
@@ -115,7 +115,9 @@ p.y+=p.vy;
 if(p.y>canvas.height) p.y=0;
 }
 
-ctx.fillStyle="rgba(255,180,220,.95)";
+ctx.fillStyle="rgba(255,170,210,1)";
+ctx.shadowBlur=12;
+ctx.shadowColor="#ff77aa";
 ctx.font=p.size*10+"px system-ui, sans-serif";
 ctx.fillText(p.char,p.x,p.y);
 
@@ -132,16 +134,20 @@ function startShow(){
 
 gift.style.display="none";
 
-/* unlock audio mobile */
+/* unlock audio */
 if(music){
 music.currentTime=0;
-music.muted=false;
 music.volume=1;
 music.play().catch(()=>{});
 }
 
+/* nổ sao */
 explode();
-setTimeout(nextMessage,4000);
+
+/* chờ lâu hơn để thấy rõ */
+setTimeout(()=>{
+nextMessage();
+},6500);
 }
 
 /* click for all devices */
