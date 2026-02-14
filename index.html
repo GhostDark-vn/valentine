@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Just for you</title>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="intro">mở giúp anh một chút nhé</div>
-
-<canvas id="stars"></canvas>
-
-<div class="chat">
-  <div id="bubble"></div>
+<!-- Unlock screen -->
+<div id="intro">
+    <div class="tap">Chạm để mở 💗</div>
 </div>
 
-<canvas id="heartCanvas"></canvas>
+<!-- sky -->
+<canvas id="sky"></canvas>
 
-<audio id="bgm" loop>
-  <source src="./assets/bg.mp3" type="audio/mpeg">
-</audio>
+<!-- chat -->
+<div class="chat">
+    <div id="chatBox" class="bubble"></div>
+</div>
 
-<script src="script.js" defer></script>
+<!-- heart images -->
+<div id="heartContainer"></div>
+
+<!-- ending -->
+<div id="ending">Happy Valentine's Day</div>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<script src="script.js"></script>
 </body>
 </html>
