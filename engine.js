@@ -125,30 +125,20 @@ draw();
 gift.addEventListener("pointerdown", startShow, {once:true});
 gift.addEventListener("touchstart", startShow, {once:true});
 gift.addEventListener("click", startShow, {once:true});
-
-  // chạy nhạc
-  const music = document.getElementById("bgm");
-music.currentTime = 0;
-music.volume = 1;
-music.play().catch(()=>{});
   
 function startShow(){
 
-  // ẩn hộp quà
-  gift.style.display="none";
+    gift.style.display="none";
 
-  // mở khoá audio mobile (KHÔNG await)
-  try{
-    music.currentTime = 0;
-    music.muted = false;
-    music.volume = 1;
-    music.play().catch(()=>{});
-  }catch(e){}
+    const music = document.getElementById("music");
+    if(music){
+        music.currentTime = 0;
+        music.volume = 1;
+        music.play().catch(()=>{});
+    }
 
-  // luôn chạy animation kể cả nhạc fail
-  explode();
-
-  setTimeout(nextMessage,4000);
+    explode();
+    setTimeout(nextMessage,4000);
 }
 
 function nextMessage(){
