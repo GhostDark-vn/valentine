@@ -103,11 +103,11 @@ transition:2s;
 #ending{
 position:fixed;
 top:50%;
-left:46%;
+left:35%;
 transform:translate(-50%,-50%) scale(.9);
 font-family:'Parisienne', cursive;
 font-size: clamp(42px, 7vw, 88px);
-font-weight:600;
+font-weight:700;
 color:#ffd9ec;
 opacity:0;
 pointer-events:none;
