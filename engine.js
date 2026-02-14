@@ -122,14 +122,28 @@ draw();
 
 /* ================= FLOW ================= */
 
-gift.onclick=async()=>{
-gift.style.display="none";
+gift.addEventListener("pointerdown", startShow, {once:true});
+gift.addEventListener("touchstart", startShow, {once:true});
+gift.addEventListener("click", startShow, {once:true});
 
-await music.play();
-explode();
+function startShow(){
 
-setTimeout(nextMessage,4000);
-};
+  // ẩn hộp quà
+  gift.style.display="none";
+
+  // mở khoá audio mobile (KHÔNG await)
+  try{
+    music.currentTime = 0;
+    music.muted = false;
+    music.volume = 1;
+    music.play().catch(()=>{});
+  }catch(e){}
+
+  // luôn chạy animation kể cả nhạc fail
+  explode();
+
+  setTimeout(nextMessage,4000);
+}
 
 function nextMessage(){
 if(messageIndex<messages.length){
