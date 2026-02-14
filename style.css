@@ -87,7 +87,7 @@ border-radius:12px;
 }
 
 /* ENDING */
-#ending{
+/*#ending{
 position:fixed;
 inset:0;
 display:flex;
@@ -99,4 +99,31 @@ opacity:0;
 z-index:3;
 text-shadow:0 0 25px #ff7aa8;
 transition:2s;
+}*/
+#ending{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(.85);
+font-family:'Parisienne', cursive;
+font-size: clamp(42px, 7vw, 88px);
+color:#ffd9ec;
+opacity:0;
+pointer-events:none;
+z-index:8;
+letter-spacing:2px;
+
+/* glow điện ảnh */
+text-shadow:
+0 0 8px rgba(255,170,210,.9),
+0 0 18px rgba(255,130,190,.8),
+0 0 38px rgba(255,80,160,.7),
+0 0 70px rgba(255,40,140,.6);
+
+transition:opacity 2s ease, transform 2s ease;
+}
+
+#ending.show{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
 }
