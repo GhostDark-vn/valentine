@@ -22,8 +22,8 @@ const messages = [
 "Thì chắc em hiểu rồi đó"
 ];
 
-let particles=[];
-let stars=[];
+const photoImgs=[...document.querySelectorAll("#photos img")];
+let photoData=[];
 let phase="idle";
 let msgIndex=0;
 let phaseTime=0;
@@ -85,11 +85,19 @@ function updateParticles(){
 }
 
 function drawParticles(){
-  ctx.fillStyle="rgba(255,180,220,.8)";
+
   particles.forEach(p=>{
-    ctx.globalAlpha=p.life;
+
+    if(p.mode==="photo"){
+      ctx.drawImage(p.img,p.x-p.size/2,p.y-p.size/2,p.size,p.size);
+      return;
+    }
+
+    ctx.globalAlpha=p.life??1;
+    ctx.fillStyle="rgba(255,180,220,.85)";
     ctx.fillRect(p.x,p.y,2,2);
   });
+
   ctx.globalAlpha=1;
 }
 
@@ -149,18 +157,25 @@ function createHeart(){
   const cx=W/2;
   const cy=H/2;
 
-  for(let t=0;t<Math.PI*2;t+=0.02){
+  let id=0;
+
+  for(let t=0;t<Math.PI*2;t+=0.025){
     const x=16*Math.pow(Math.sin(t),3);
     const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+
+    const img = photoImgs[id%photoImgs.length];
 
     particles.push({
       x:Math.random()*W,
       y:Math.random()*H,
-      tx:cx+x*14,
-      ty:cy+y*14,
-      life:1,
-      mode:"heart"
+      tx:cx+x*13,
+      ty:cy+y*13,
+      img:img,
+      size:22,
+      mode:"photo"
     });
+
+    id++;
   }
 }
 
