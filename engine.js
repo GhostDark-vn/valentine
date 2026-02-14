@@ -126,6 +126,12 @@ gift.addEventListener("pointerdown", startShow, {once:true});
 gift.addEventListener("touchstart", startShow, {once:true});
 gift.addEventListener("click", startShow, {once:true});
 
+  // chạy nhạc
+  const music = document.getElementById("bgm");
+music.currentTime = 0;
+music.volume = 1;
+music.play().catch(()=>{});
+  
 function startShow(){
 
   // ẩn hộp quà
