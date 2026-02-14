@@ -1,16 +1,18 @@
-document.addEventListener("DOMContentLoaded", ()=>{
-function draw(){
+document.addEventListener("DOMContentLoaded", () => {
+
+/* ================= SETUP ================= */
+
 const canvas = document.getElementById("stage");
 const ctx = canvas.getContext("2d");
 const gift = document.getElementById("gift");
 const music = document.getElementById("music");
 
 resize();
-addEventListener("resize", resize);
+window.addEventListener("resize", resize);
 
 function resize(){
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
 /* ================= PARTICLE ================= */
@@ -28,7 +30,7 @@ const messages=[
 "Thì chắc em hiểu rồi đó"
 ];
 
-/* create falling star */
+/* falling star */
 function spawnStar(x,y){
 particles.push({
 x,y,
@@ -36,19 +38,20 @@ vx:(Math.random()-0.5)*0.8,
 vy:Math.random()*1+0.5,
 size:Math.random()*2+1,
 alpha:1,
-char:"Gia Như"
+char:"Gia Như",
+lock:false
 });
 }
 
 /* explosion */
 function explode(){
-for(let i=0;i<800;i++){
+for(let i=0;i<900;i++){
 spawnStar(canvas.width/2,canvas.height/2);
 }
 state="falling";
 }
 
-/* gather text */
+/* form text */
 function formText(text){
 particles=[];
 const gap=14;
@@ -71,7 +74,7 @@ lock:true
 state="forming";
 }
 
-/* heart */
+/* form heart */
 function formHeart(){
 particles=[];
 const cx=canvas.width/2;
@@ -86,7 +89,7 @@ x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 tx:cx+x*14,
 ty:cy+y*14,
-size:2,
+size:2.2,
 char:"✦",
 lock:true
 });
@@ -94,10 +97,11 @@ lock:true
 state="heart";
 }
 
-/* ================= DRAW ================= */
+/* ================= DRAW LOOP ================= */
 
 function draw(){
-ctx.fillStyle="rgba(7,11,23,0.25)";
+
+ctx.fillStyle="rgba(7,11,23,0.35)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
 particles.forEach(p=>{
@@ -111,38 +115,39 @@ p.y+=p.vy;
 if(p.y>canvas.height) p.y=0;
 }
 
-ctx.fillStyle="rgba(255,180,220,.9)";
-ctx.font=p.size*10+"px sans-serif";
+ctx.fillStyle="rgba(255,180,220,.95)";
+ctx.font=p.size*10+"px system-ui, sans-serif";
 ctx.fillText(p.char,p.x,p.y);
 
 });
 
 requestAnimationFrame(draw);
 }
+
 draw();
 
 /* ================= FLOW ================= */
 
-/*gift.addEventListener("pointerdown", startShow, {once:true});
-gift.addEventListener("touchstart", startShow, {once:true});
-gift.addEventListener("click", startShow, {once:true});
-*/
-gift.addEventListener("pointerup", startShow, {once:true});
-
 function startShow(){
 
-    gift.style.display="none";
+gift.style.display="none";
 
-    const music = document.getElementById("music");
-    if(music){
-        music.currentTime = 0;
-        music.volume = 1;
-        music.play().catch(()=>{});
-    }
-
-    explode();
-    setTimeout(nextMessage,4000);
+/* unlock audio mobile */
+if(music){
+music.currentTime=0;
+music.muted=false;
+music.volume=1;
+music.play().catch(()=>{});
 }
+
+explode();
+setTimeout(nextMessage,4000);
+}
+
+/* click for all devices */
+["pointerdown","touchstart","click"].forEach(evt=>{
+gift.addEventListener(evt,startShow,{once:true});
+});
 
 function nextMessage(){
 if(messageIndex<messages.length){
@@ -152,4 +157,5 @@ setTimeout(nextMessage,3500);
 formHeart();
 }
 }
+
 });
