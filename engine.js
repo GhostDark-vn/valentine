@@ -123,10 +123,12 @@ draw();
 
 /* ================= FLOW ================= */
 
-gift.addEventListener("pointerdown", startShow, {once:true});
+/*gift.addEventListener("pointerdown", startShow, {once:true});
 gift.addEventListener("touchstart", startShow, {once:true});
 gift.addEventListener("click", startShow, {once:true});
-  
+*/
+gift.addEventListener("pointerup", startShow, {once:true});
+
 function startShow(){
 
     gift.style.display="none";
