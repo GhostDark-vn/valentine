@@ -1,19 +1,3 @@
-
-valentine
-Repository navigation
-Code
-Issues
-Pull requests
-valentine
-/script.js
-GhostDark-vn
-GhostDark-vn
-6 minutes ago
-140 lines (116 loc) · 2.42 KB
-
-Code
-
-Blame
 function draw(){
 const canvas = document.getElementById("stage");
 const ctx = canvas.getContext("2d");
