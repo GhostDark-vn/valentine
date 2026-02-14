@@ -106,7 +106,7 @@ const heart=document.createElement("div");
 heart.className="heart";
 heartBox.appendChild(heart);
 
-const total=30;
+const total=4;
 const R=130;
 
 for(let i=0;i<total;i++){
