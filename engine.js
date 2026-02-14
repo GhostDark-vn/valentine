@@ -1,143 +1,91 @@
-document.addEventListener("DOMContentLoaded",()=>{
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+const gift = document.querySelector('.box');
+const dialog = document.getElementById('dialog');
+const music = document.getElementById('music');
 
-const canvas=document.getElementById("scene");
-const ctx=canvas.getContext("2d");
-const gift=document.getElementById("gift");
-const music=document.getElementById("bgm");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-function resize(){
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
+// falling name particles
+const particles = [];
 
-/* ========= PARTICLE ENGINE ========= */
-
-const COUNT=1400;
-let particles=[];
-
-for(let i=0;i<COUNT;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-tx:Math.random()*canvas.width,
-ty:Math.random()*canvas.height,
-vx:0,vy:0,
-size:1+Math.random()*2,
-char:"Gia Như"
-});
+class StarText{
+  constructor(){
+    this.x = Math.random()*canvas.width;
+    this.y = -20;
+    this.speed = 0.3 + Math.random()*0.7;
+    this.size = 10 + Math.random()*6;
+    this.alpha = Math.random()*0.8+0.2;
+  }
+  update(){ this.y += this.speed; }
+  draw(){
+    ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+    ctx.font = `${this.size}px Arial`;
+    ctx.fillText('Gia Như',this.x,this.y);
+  }
 }
 
-/* physics */
-function update(){
+function animateBG(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-ctx.fillStyle="rgba(7,11,23,0.12)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(Math.random()<0.12 && particles.length<120)
+    particles.push(new StarText());
 
-particles.forEach(p=>{
+  particles.forEach((p,i)=>{
+    p.update();
+    p.draw();
+    if(p.y>canvas.height) particles.splice(i,1);
+  });
 
-let dx=p.tx-p.x;
-let dy=p.ty-p.y;
-
-p.vx+=dx*0.002;
-p.vy+=dy*0.002;
-
-p.vx*=0.92;
-p.vy*=0.92;
-
-p.x+=p.vx;
-p.y+=p.vy;
-
-ctx.fillStyle="rgba(255,170,210,1)";
-ctx.shadowBlur=12;
-ctx.shadowColor="#ff77aa";
-ctx.font=p.size*10+"px sans-serif";
-ctx.fillText(p.char,p.x,p.y);
-
-});
-
-requestAnimationFrame(update);
+  requestAnimationFrame(animateBG);
 }
-update();
+animateBG();
 
-/* ========= MORPH FUNCTIONS ========= */
-
-function scatter(){
-particles.forEach(p=>{
-p.tx=Math.random()*canvas.width;
-p.ty=Math.random()*canvas.height;
-p.char="Gia Như";
-p.size=1.6;
-});
-}
-
-function textShape(text){
-
-let gap=16;
-let start=canvas.width/2-text.length*gap/2;
-
-particles.forEach((p,i)=>{
-let c=text[i%text.length];
-p.tx=start+(i%text.length)*gap;
-p.ty=canvas.height/2;
-p.char=c;
-p.size=2.6;
-});
-}
-
-function heartShape(){
-
-let cx=canvas.width/2;
-let cy=canvas.height/2;
-
-particles.forEach((p,i)=>{
-let t=i/particles.length*Math.PI*2;
-
-let x=16*Math.pow(Math.sin(t),3);
-let y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
-
-p.tx=cx+x*18;
-p.ty=cy+y*18;
-p.char="✦";
-p.size=2.2;
-});
-}
-
-/* ========= STORY ========= */
-
-const messages=[
-"Không phải anh vô tình",
-"Chỉ là anh chọn nhẹ nhàng hơn một chút",
-"Để nếu em không thích",
-"Mọi thứ vẫn còn tự nhiên",
-"Nhưng nếu em cảm nhận được",
-"Thì chắc em hiểu rồi đó"
+// dialogue story
+const story=[
+"Anh đã chuẩn bị cái này khá lâu rồi...",
+"Không phải thứ gì lớn lao đâu",
+"Chỉ là vài điều anh luôn muốn nói",
+"Ở bên em, mọi thứ đều dịu lại",
+"Cảm giác rất bình yên",
+"Và anh nhận ra...",
+"Anh thích em mất rồi 💗"
 ];
 
-const wait=t=>new Promise(r=>setTimeout(r,t));
-
-async function story(){
-
-await wait(1500);
-
-for(let m of messages){
-textShape(m);
-await wait(3200);
-scatter();
-await wait(1200);
+function showStory(i=0){
+  if(i>=story.length){heartExplosion();return;}
+  dialog.style.opacity=1;
+  dialog.textContent=story[i];
+  setTimeout(()=>showStory(i+1),2800);
 }
 
-heartShape();
+// hearts
+function heartExplosion(){
+  dialog.textContent="Valentine này làm người yêu anh nhé ❤️";
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const h=document.createElement('div');
+      h.className='heart';
+      h.innerText='❤';
+      h.style.left=Math.random()*100+'%';
+      h.style.bottom='10%';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),4000);
+    },i*120);
+  }
 }
 
-/* ========= START ========= */
+// click gift
+gift.onclick=()=>{
+  gift.parentElement.remove();
+  music.volume=.6;
+  music.play().catch(()=>{});
+  showStory();
+};
 
-gift.addEventListener("pointerup",()=>{
-gift.style.display="none";
-music.currentTime=0;
-music.play().catch(()=>{});
-story();
-},{once:true});
-
-});
+// resize
+window.onresize=()=>{
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+};
